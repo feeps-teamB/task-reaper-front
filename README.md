@@ -18,6 +18,14 @@
 7. nuxtをインストール  
 `npm install`
 
+# pullしてきたときの環境構築手順
+1. コンテナを立ち上げる  
+`docker compose up -d --build`
+2. コンテナに入る  
+`docker compose exec feeps_nuxt bash`
+3. サーバーを動かす  
+下記参照
+
 # サーバー実行方法
 1. コンテナを動かす  
 `docker compose start`
@@ -25,3 +33,11 @@
 `docker compose exec feeps_nuxt bash`
 3. サーバーを起動する  
 `npm run dev`
+4. webページにアクセスする  
+`http://localhost/pageXX`
+
+# 終了方法
+1. サーバーを止める  
+control + C
+2. コンテナから抜ける  
+`exit`
