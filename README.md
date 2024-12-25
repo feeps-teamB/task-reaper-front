@@ -18,7 +18,7 @@
 7. nuxtをインストール  
 `npm install`
 
-# pullしてきたときの環境構築手順
+# cloneしてきたときの環境構築手順
 1. コンテナを立ち上げる  
 `docker compose up -d --build`
 2. コンテナに入る  
