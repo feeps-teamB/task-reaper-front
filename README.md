@@ -41,3 +41,5 @@
 control + C
 2. コンテナから抜ける  
 `exit`
+3. コンテナを止める  
+`docker compose stop`
