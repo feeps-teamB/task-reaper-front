@@ -1,0 +1,20 @@
+services:
+  feeps_nuxt:
+    container_name: feeps_nuxt
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app:cached
+      - nuxt_node_modules:/app/node_modules
+    ports:
+      - "80:3000"
+      - "24678:24678"
+    tty: true
+    environment:
+      - HOST=0.0.0.0
+      - port=80
+      - CHOKIDAR_USEPOLLING=true
+#    command: sh -c "yarn && yarn dev"
+volumes:
+  nuxt_node_modules:
