@@ -43,3 +43,7 @@ control + C
 `exit`
 3. コンテナを止める  
 `docker compose stop`
+
+# PR時のタイトル命名規則
+[開発種類]/#[issue番号]-[PRの内容の英訳]
+ex)feature/#1-create-tasks-API
