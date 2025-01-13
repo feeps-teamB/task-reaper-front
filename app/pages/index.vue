@@ -11,5 +11,7 @@
     <br/>
     <br/>
     <nuxt-link to="/teamSelectSchedule/1" class="schedule-link">チーム選択</nuxt-link>
+    <br/>
+    <nuxt-link to="/teamSelectCategory/1" class="schedule-link">チーム選択</nuxt-link>
   </div>
 </template>
