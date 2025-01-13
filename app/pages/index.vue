@@ -7,6 +7,16 @@
     <nuxt-link to="/scheduleDetail/5" class="schedule-link">スケジュール5詳細</nuxt-link>
     <br/>
     <br/>
+    <nuxt-link to="/categoryDetail/1" class="schedule-link">カテゴリ1詳細</nuxt-link>
+    <br/>
+    <nuxt-link to="/categoryDetail/5" class="schedule-link">カテゴリ2詳細</nuxt-link>
+    <br/>
+    <br/>
+    <nuxt-link to="/teamDetail/1" class="schedule-link">チーム1詳細</nuxt-link>
+    <br/>
+    <nuxt-link to="/teamDetail/2" class="schedule-link">チーム2詳細</nuxt-link>
+    <br/>
+    <br/>
     <nuxt-link to="/addSchedule/1" class="schedule-link">スケジュール追加</nuxt-link>
     <br/>
     <br/>
