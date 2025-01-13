@@ -60,7 +60,7 @@
   // 選択されたチームIDで遷移する処理
   const submitSelection = () => {
     if (selectedTeamId.value) {
-      router.push(`/addScheduleView/${selectedTeamId.value}`)
+      router.push(`/addSchedule/${selectedTeamId.value}`)
     }
   }
   

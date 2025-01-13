@@ -3,7 +3,7 @@
       <div class="modal-content">
         <button class="close-button" @click="closeModal">×</button>
         <h2>新規スケジュール作成</h2>
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="goToConfirm">
           <div>
             <label for="title">スケジュールタイトル</label>
             <input type="text" id="title" v-model="form.title" required />
@@ -29,7 +29,7 @@
             </select>
           </div>
           <div>
-            <button type="submit">保存</button>
+            <button type="submit">確認画面へ</button>
           </div>
         </form>
         <div v-if="error" style="color: red;">
@@ -41,10 +41,11 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRouter, useRoute } from 'vue-router'
   
-  // ルーターを取得
+  // ルーターとルートを取得
   const router = useRouter()
+  const route = useRoute()
   
   // フォームデータ
   const form = ref({
@@ -61,30 +62,18 @@
   
   // モーダルを閉じる処理
   const closeModal = () => {
-    // モーダルを閉じるために別のページへ移動（例: ホームに戻る）
     router.push('/')
   }
   
-  // フォーム送信処理
-  const submitForm = async () => {
-    try {
-      // APIにPOSTリクエストを送信
-      await $fetch('http://localhost:8080/addScheduleSave', {
-        method: 'POST',
-        body: form.value,
-      })
-      // 成功したらホームに遷移
-      router.push('/')
-    } catch (err) {
-      console.error('スケジュール作成に失敗しました:', err)
-      error.value = 'スケジュールの作成に失敗しました。後ほど再試行してください。'
-    }
+  // 確認画面へ遷移
+  const goToConfirm = () => {
+    router.push({ name: 'addScheduleSave', query: { ...form.value } })
   }
   
   // カテゴリデータの取得
   onMounted(async () => {
     try {
-      const response = await $fetch('http://localhost:8080/addSchedule/view/1')  // カテゴリ情報のAPI
+      const response = await $fetch(`http://localhost:8080/addSchedule/view/${route.params.id}`)
       categories.value = response
     } catch (err) {
       console.error('カテゴリ情報の取得に失敗しました:', err)
@@ -112,10 +101,9 @@
     border-radius: 8px;
     max-width: 600px;
     width: 620px;
-    height: 659px;
+    height: auto;
     position: relative;
   }
-  
   
   form div {
     margin-bottom: 10px;
@@ -136,6 +124,5 @@
     border: none;
     cursor: pointer;
   }
-  
   </style>
   
