@@ -1,65 +1,61 @@
 <template>
-    <div class="modal-overlay" @click.self="closeModal">
-      <div class="modal-content">
-        <button class="close-button" @click="closeModal">×</button>
+    <modal>
         <h2>カテゴリ保存確認</h2>
         <ul>
-          <li><strong>カテゴリ名:</strong> {{ form.name }}</li>
-          <li><strong>カテゴリカラー:</strong> <span :style="{ color: form.color }">{{ form.color }}</span></li>
-          <li><strong>チームID:</strong> {{ form.teamId }}</li>
+            <li><strong>カテゴリ名:</strong> {{ form.name }}</li>
+            <li><strong>カテゴリカラー:</strong> <span :style="{ color: form.color }">{{ form.color }}</span></li>
+            <li><strong>チームID:</strong> {{ form.teamId }}</li>
         </ul>
         <button @click="submitForm">保存</button>
         <button @click="goBack">戻る</button>
         <div v-if="error" style="color: red;">
-          <p>{{ error }}</p>
+            <p>{{ error }}</p>
         </div>
-      </div>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  
-  const router = useRouter()
-  const route = useRoute()
-  
-  const form = ref({
+    </modal>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import modal from '@/components/modal'
+
+const router = useRouter()
+const route = useRoute()
+
+const form = ref({
     name: route.query.name || '',
     color: route.query.color || '',
     teamId: route.query.teamId || null,
-  })
-  
-  const error = ref(null)
-  
-  const closeModal = () => {
-    router.push('/')
-  }
-  
-  const goBack = () => {
+})
+
+const error = ref(null)
+
+
+
+const goBack = () => {
     router.push({
-      path: '/addCategory',
-      query: { ...form.value },
+        path: '/addCategory',
+        query: { ...form.value },
     })
-  }
-  
-  const submitForm = async () => {
+}
+
+const submitForm = async () => {
     try {
-      await $fetch('http://localhost:8080/addCategorySave', {
-        method: 'POST',
-        body: form.value,
-      })
-      alert('カテゴリが正常に保存されました！')
-      router.push('/')
+        await $fetch('http://localhost:8080/addCategorySave', {
+            method: 'POST',
+            body: form.value,
+        })
+        alert('カテゴリが正常に保存されました！')
+        router.push('/')
     } catch (err) {
-      console.error('カテゴリの保存に失敗しました:', err)
-      error.value = 'カテゴリの保存に失敗しました。後ほど再試行してください。'
+        console.error('カテゴリの保存に失敗しました:', err)
+        error.value = 'カテゴリの保存に失敗しました。後ほど再試行してください。'
     }
-  }
-  </script>
-  
-  <style scoped>
-  .modal-overlay {
+}
+</script>
+
+<style scoped>
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -69,9 +65,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
@@ -79,19 +75,18 @@
     width: 620px;
     height: auto;
     position: relative;
-  }
-  
-  ul {
+}
+
+ul {
     list-style-type: none;
     padding: 0;
-  }
-  
-  li {
+}
+
+li {
     margin-bottom: 10px;
-  }
-  
-  button {
+}
+
+button {
     margin-right: 10px;
-  }
-  </style>
-  
+}
+</style>
