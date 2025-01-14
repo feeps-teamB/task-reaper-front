@@ -1,6 +1,5 @@
 <template>
   <modal>
-    <h2>スケジュール詳細</h2>
     <div v-if="team">
       <p><strong>チーム名:</strong> {{ team.name }}</p>
       <p><strong>説明:</strong> {{ team.description }}</p>
@@ -20,7 +19,6 @@ import modal from '@/components/modal'
 
 // ルートとルーターを取得
 const route = useRoute()
-const router = useRouter()
 
 // スケジュールデータとエラーメッセージ用の変数
 const team = ref(null)
@@ -40,35 +38,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  width: 620px;
-  height: 659px;
-  position: relative;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
 </style>
