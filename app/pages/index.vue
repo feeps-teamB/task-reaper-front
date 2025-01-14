@@ -1,16 +1,14 @@
 <template>
     <main class="landing-container">
-      <!-- <header class="header">
+      <header class="header">
         <nav class="navigation">
-          <div class="brand">
             <img
               loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/fb1d2b439b9126008c155197ce13b555e6fb4d087c6a4763e4b4748b1b474bc0?placeholderIfAbsent=true&apiKey=37f273673bad4412bbe7062a6725c33c"
-              class="logo"
+              src="../static/images/icon.png"
+              class="brand"
               alt="Task Reaper Logo"
             />
-            <h1 class="brand-name">Task-Reaper</h1>
-          </div>
+
           <div class="nav-links">
             <a href="#learn" class="nav-link">Learn More</a>
             <a href="#contact" class="nav-link">Contact</a>
@@ -20,15 +18,15 @@
             <a href="/signup" class="auth-link signup-link">Signup</a>
           </div>
         </nav>
-      </header> -->
-      <!-- <section class="hero-section">
+      </header>
+      <section class="hero-section">
         <img
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/f0880341d7ce3efe2d49721da222751f2372735e812c2a98acc566e9587bbb8b?placeholderIfAbsent=true&apiKey=37f273673bad4412bbe7062a6725c33c"
           class="hero-image"
           alt="Task Reaper Hero Banner"
         />
-      </section> -->
+      </section>
       <iframe style="border: 1px solid rgba(0, 0, 0, 0.1); position: absolute; top: 380px; left: 830px;" width="510" height="380" src="https://embed.figma.com/proto/PjzjpL38bKyQR1XsqGzepq/TASK-REAPER?node-id=25-2259&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=25%3A2259&show-proto-sidebar=0&embed-host=share" allowfullscreen></iframe>
       <div>
     <p>リンク置き場</p>
@@ -56,7 +54,7 @@
   </div>
     </main>
 </template>
-<!-- 
+
 <style scoped>
 .landing-container {
   background: #fff;
@@ -77,17 +75,9 @@
 }
 
 .brand {
-  border-radius: 13px;
-  background: #E3EBF6;
-  box-shadow: 4px 4px 4px rgba(47, 71, 94, 0.5);
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
   color: #2F5E39;
   text-align: center;
-  padding: 3px 0;
   font: 700 28px Inter, sans-serif;
-  flex: 1;
 }
 
 .logo {
@@ -97,12 +87,12 @@
   align-self: start;
 }
 
-.brand-name {
+/* .brand-name {
   flex-grow: 1;
   width: 170px;
   margin: auto 0;
   font: inherit;
-}
+} */
 
 .nav-links {
   display: flex;
@@ -162,4 +152,4 @@
   object-fit: cover;
 }
 </style>
- -->
+
