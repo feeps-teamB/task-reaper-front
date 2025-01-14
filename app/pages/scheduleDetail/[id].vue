@@ -1,7 +1,5 @@
 <template>
-    <div class="modal-overlay" @click.self="closeModal">
-      <div class="modal-content">
-        <button class="close-button" @click="closeModal">×</button>
+  <modal>
         <h2>スケジュール詳細</h2>
         <div v-if="schedule">
           <h3>{{ schedule.title }}</h3>
@@ -21,12 +19,12 @@
         <div v-else>
           <p>ロード中...</p>
         </div>
-      </div>
-    </div>
+	</modal>
   </template>
   <script setup>
   import { ref, onMounted } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
+	import modal from '@/components/modal'
   
   // ルートとルーターを取得
   const route = useRoute()
@@ -43,12 +41,6 @@
   router.push(`/scheduleEdit/${route.params.id}?teamId=${teamId}`)
 }
   console.log('route.params.id:', route.params.id)
-  
-  // モーダルを閉じる処理
-  const closeModal = () => {
-    // モーダルを閉じるために別のページへ移動（例: ホームに戻る）
-    router.push('/')
-  }
 
   // データの取得
   onMounted(async () => {
@@ -63,36 +55,3 @@
   })
   </script>
   
-  <style scoped>
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 600px;
-    width: 620px;
-    height: 659px;
-    position: relative;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  </style>
