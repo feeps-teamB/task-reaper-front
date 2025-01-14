@@ -12,6 +12,8 @@
           <div>
             <p :style="{ color: schedule.category.color }"><strong>カテゴリ:</strong> {{ schedule.category.name }}</p>
           </div>
+           <!-- 編集画面へ移動するボタン -->
+          <button @click="goToEdit" class="edit-button">編集</button>
         </div>
         <div v-else-if="error">
           <p style="color: red;">{{ error }}</p>
@@ -34,12 +36,20 @@
   const schedule = ref(null)
   const error = ref(null)
   
+    // 編集画面へ遷移する処理
+  const goToEdit = () => {
+  // チームIDを取得し、編集画面に送る
+  const teamId = schedule.value.category.team.teamId
+  router.push(`/scheduleEdit/${route.params.id}?teamId=${teamId}`)
+}
+  console.log('route.params.id:', route.params.id)
+  
   // モーダルを閉じる処理
   const closeModal = () => {
     // モーダルを閉じるために別のページへ移動（例: ホームに戻る）
     router.push('/')
   }
-  
+
   // データの取得
   onMounted(async () => {
     const scheduleId = route.params.id
