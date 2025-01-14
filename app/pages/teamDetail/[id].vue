@@ -38,5 +38,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-
+/*なぜかこれ消すとバグる */
 </style>
