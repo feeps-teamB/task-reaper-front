@@ -22,6 +22,7 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import modal from '@/components/modal'
+
 // ルーターとルートを取得
 const router = useRouter()
 const route = useRoute()
@@ -51,11 +52,24 @@ const goBack = () => {
 // エラー
 const error = ref(null)
 
-// カテゴリ名を取得
+// カテゴリIDを使ってカテゴリ情報を取得
+const category = ref(null)
 const categoryName = computed(() => {
-  const categories = JSON.parse(localStorage.getItem('categories')) || []
-  const category = categories.find(cat => cat.categoryId == form.value.categoryId)
-  return category ? category.name : '不明'
+  if (!category.value) {
+    return 'カテゴリ情報が読み込まれていません'
+  }
+  return category.value.name || '不明'
+})
+
+onMounted(async () => {
+  const categoryId = form.value.categoryId
+  try {
+    const response = await $fetch(`http://localhost:8080/categoryDetail/view/${categoryId}`)
+    category.value = response
+  } catch (err) {
+    console.error('カテゴリ情報の取得に失敗しました:', err)
+    error.value = 'カテゴリ情報の取得に失敗しました。後ほど再試行してください。'
+  }
 })
 </script>
 

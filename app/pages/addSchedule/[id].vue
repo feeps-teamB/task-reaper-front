@@ -60,7 +60,16 @@ const error = ref(null)
 
 // 確認画面へ遷移
 const goToConfirm = () => {
-  router.push({ name: 'addScheduleSave', query: { ...form.value } })
+  router.push({
+    name: 'addScheduleSave',
+    query: {
+      title: form.value.title,
+      description: form.value.description,
+      startDate: form.value.startDate,
+      endDate: form.value.endDate,
+      categoryId: form.value.categoryId,
+    }
+  })
 }
 
 // カテゴリデータの取得
@@ -85,5 +94,4 @@ input, textarea, select {
   padding: 10px;
   margin-top: 5px;
 }
-
 </style>
