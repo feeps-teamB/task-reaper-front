@@ -1,5 +1,5 @@
 <template>
-    <div class = "buttons">
+    <div class = "button-container">
         <button class = "button">Add</button>
         <button class = "button">Teams</button>
         <button class = "button">Category</button>
@@ -7,14 +7,15 @@
 </template>
 
 <style>
-.buttons{
+.button-container{
     width: 20%;
     display: flex;
     flex-direction: column;
 }
 
 .button{
-    padding: 10px;
-    margin: 10px;
+    padding: 1vw;
+    margin: 1vw;
+    font-size: 1vw;
 }
 </style>
