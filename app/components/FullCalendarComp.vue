@@ -1,13 +1,11 @@
 <template>
-    <div class = "calendar-container-border">
-        <div class = "calendar-container">
-            <div class = "calendar-header">
-                <h1 id="custom-month"></h1>
-                <h2 v-if = "errorMessage">{{ errorMessage }}</h2>
-            </div>
-            <FullCalendar ref = "fullCalendar" :options="calendarOptions" />
-        </div>
+  <div class = "calendar-container">
+    <div class = "calendar-header">
+      <h1 id="custom-month"></h1>
     </div>
+    
+    <FullCalendar ref = "fullCalendar" :options="calendarOptions" />
+  </div>
 </template>
   
 <script>
@@ -15,6 +13,8 @@
   import dayGridPlugin from '@fullcalendar/daygrid'
   import timeGridPlugin from '@fullcalendar/timegrid'
   import { useSharedData } from '@/stores/useSharedData';
+  import { toRaw } from "vue";
+  
 
   export default {
     name: "fullCalendarComp",
@@ -28,92 +28,94 @@
         calendarOptions: {
           plugins: [dayGridPlugin, timeGridPlugin],
           initialView: 'dayGridMonth',
-          events: [],
+          events: [
+            { title: 'Event 1', start: '2025-01-01' },
+            { title: 'Event 2', start: '2025-01-02' },
+            //{ title: this.data[0].title, start: this.data[0].startDate, end: this.data[0].endDate}
+          ],
           locale: 'ja',
           datesSet: this.handleDatesSet,
-          eventClick: this.handleEventClick,
-          headerToolbar: false,
-          eventContent: (info) => {
-            const link = document.createElement("a");
-            const url = `/scheduleDetail/${info.event.scheduleId}`;
-            const wrapper = document.createElement("div");
-            wrapper.innerHTML = `<nuxt-link to="${url}">${info.event.title}</nuxt-link>`;
-            return { domNodes: [wrapper] }; // DOMノードを返す
-          }
+          headerToolbar: false
         },
-        calendar: null,
-        events: null,
-        errorMessage: null
+        calendar: null
       };
     },
     async mounted() {
-      this.getFullCalendar();
-      this.fetchEvents();
+      $fetch('http://localhost:8080/calendar/view/1/2024/12').then((res) => {
+        this.data = res;
+        console.log("ok");
+        this.updateCalendarEvents();
+        //console.log(this.calendarOptions.events);
+      })
+  },
+  methods: {
+    handleDatesSet(info) {
+      const month = info.view.currentStart.toLocaleString('default', { month: 'long' });
+      const year = info.view.currentStart.getFullYear();
+
+      this.sharedDataStore.updateData(year); // 年をストアに更新
+      document.getElementById('custom-month').textContent = month;
+      
     },
-    methods: {
-      //カレンダー情報取得
-      getFullCalendar(){
-        this.$nextTick(() => {
-          if (this.$refs.fullCalendar) {
-            this.calendar = this.$refs.fullCalendar.getApi();
-            this.sharedDataStore.setCalendar(this.calendar);
-          } else {
-            console.error('カレンダーの参照が取得できません');
-          }
-        });
-      },
-      //年と月情報取得
-      handleDatesSet(info) {
-        const month = info.view.currentStart.toLocaleString('default', { month: 'long' });
-        const year = info.view.currentStart.getFullYear();
-        this.sharedDataStore.updateData(year);
-        document.getElementById('custom-month').textContent = month;
-      },
-      //スケジュール取得してカレンダーに表示
-      async fetchEvents() {
-        try {
-          const response = await fetch('http://localhost:8080/calendar/view/1/2024/12');
-          const data = await response.json();
-          data.forEach(event => {
-            this.calendar.addEvent({
-              id: event.scheduleId,
-              start: event.startDate,
-              title: event.title,
-              end: event.endDate
-            });
-          });
-        } catch (error) {
-          this.errorMessage = error;
-        }
-      },
-      //クリック時のスケジュール情報取得
-      handleEventClick(info){
-        const eventInfo = info.event;
-        console.log('イベントタイトル:', eventInfo.title);
-        console.log('開始日時:', eventInfo.start);
-        console.log('ID:', eventInfo.id); 
-      },
+    updateCalendarEvents() {
+      // `data` を使用してカレンダーイベントを更新
+      //console.log(this.data);
+      const events = this.data.map((item) => ({
+        title: item.title,
+        start: item.startDate,
+        end: item.endDate,
+      }));
+
+      //console.log(events);
+      //console.log(this.calendarOptions.events);
+
+      this.calendarOptions = {
+        ...this.calendarOptions,
+        events: events, // 新しいイベントを設定
+      };
+      
+      this.$nextTick(() => {
+      console.log(this.calendarOptions);
+      const calendarApi = this.$refs.fullCalendar.getApi();
+      //scalendarApi.refetchEvents();
+    });
+    },
+    getSchedules(){
+        
     }
+    /*getYear(calendar) {
+      if (calendar) {
+        const currentDate = calendar.getDate();
+        return currentDate.getFullYear();
+      } else {
+        console.error("カレンダーが初期化されていません");
+      }
+    },
+    checkCalendar(){
+        if (this.$refs.fullCalendar) {
+          console.log("カレンダーが初期化されました");
+          this.calendar = this.$refs.fullCalendar.getApi();
+          this.year = this.getYear(this.calendar);
+          console.log(this.year);
+        } else {
+          console.log("カレンダーがまだ初期化されていません。再試行します。");
+        }
+    },
+    updateSharedData(){
+        this.sharedDataStore.updateData(this.year);
+    }
+        */
+  }
   };
 </script>
 
 <style>
-.calendar-container-border{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 4px 4px 4px rgba(47, 71, 94, 0.50);
-    border-radius: 12.50px;
-    border: 1px white solid;
-}
-
 .calendar-container{
-    height: 70vh;
-    width: 60vw;
-    margin-right: 5vw;
-    margin-left: 5vw;
+  height: 70vh;
+  width: 50vw;
+  margin: 0 auto;
+  margin-right: 10vw;
+  
 }  
 
 .calendar-container .fc{
@@ -127,9 +129,5 @@
   color: white;
   justify-content: center;
 }
-
-.fc-event-main a{
-    text-decoration: none;
-    color: black;
-}
 </style>
+  
