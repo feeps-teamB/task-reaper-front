@@ -1,16 +1,37 @@
 <template>
   <modal>
-    <h2>スケジュール確認</h2>
-    <ul>
-      <li><strong>タイトル:</strong> {{ form.title }}</li>
-      <li><strong>説明:</strong> {{ form.description }}</li>
-      <li><strong>開始日:</strong> {{ form.startDate }}</li>
-      <li><strong>終了日:</strong> {{ form.endDate }}</li>
-      <li><strong>カテゴリ:</strong> {{ categoryName }}</li>
-    </ul>
-    <div>
-      <button @click="submitForm">保存</button>
-      <button @click="goBack">戻る</button>
+    <CategoryRead
+    label="タイトル"
+    id="form-title"
+    :value="form.title"
+    />  
+    <TextRead
+    label="タイトル"
+    id="form-title"
+    :value="form.title"
+    />
+    
+    <div class="date-row">
+      <DateRead
+      id="startDate"
+      label="開始日"
+      :value="form.startDate"
+      />
+      <DateRead
+      id="endDate"
+      label="終了日"
+      :value="form.endDate"
+      />
+    </div>
+    
+    <TextRead
+    label="説明"
+    id="form-description"
+    :value="form.description"
+    />
+    <div class="button-container">
+      <BuckButton class="buck-button" type="button" @click="goBack">戻る</BuckButton>
+      <SubmitButton class="submit-button" type="submit" @click="submitForm">作成</SubmitButton>
     </div>
     <div v-if="error" style="color: red;">
       <p>{{ error }}</p>
@@ -22,6 +43,12 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import modal from '@/components/modal'
+import CategoryRead from '@/components/CategoryRead'
+import TextRead from '@/components/TextRead'
+import DateRead from '@/components/DateRead'
+import SubmitButton from '@/components/SubmitButton.vue'
+import BuckButton from '@/components/BuckButton.vue'
+
 
 // ルーターとルートを取得
 const router = useRouter()
@@ -74,16 +101,43 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
+form {
+  display: flex;
+  flex-direction: column;
+  height: 465px; /* 親要素の高さを100%に */
 }
 
-li {
-  margin-bottom: 10px;
+.submit-button {
+  margin-top: auto; /* ボタンを一番下に寄せる */
 }
 
-button {
-  margin-right: 10px;
+.date-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;   
+}
+.separator {
+  display: flex;
+  width: 36px;
+  height: 57px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  
+  color: #2F5E39;
+  text-align: center;
+  -webkit-text-stroke-width: 0.5;
+  -webkit-text-stroke-color: #E3EBF6;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.button-container {
+  display: flex; /* フレックスボックスで子要素を横並びに */
+  justify-content: center; /* 子要素を横方向で中央揃え */
+  gap: 43px; /* ボタン間のスペースを設定 */
+  margin-top: 20px; /* 見栄えのため上部に余白を追加 */
 }
 </style>
