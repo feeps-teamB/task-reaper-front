@@ -1,7 +1,7 @@
 <template>
   <modal>
     <form @submit.prevent="goToConfirm">
-      <SelectInput
+      <CategorySelect
       id="category"
       label="カテゴリ"
       :options="categories"
@@ -31,7 +31,7 @@
       />
       <div class="button-container">
         <BuckButton class="buck-button" type="button">戻る</BuckButton>
-        <FormButton class="submit-button" type="submit">作成</FormButton>
+        <SubmitButton class="submit-button" type="submit">作成</SubmitButton>
       </div>
     </form>
     <div v-if="error" style="color: red;">
@@ -46,8 +46,8 @@ import { useRouter, useRoute } from 'vue-router'
 import modal from '@/components/modal'
 import TextInput from '@/components/TextInput.vue'
 import DateInput from '@/components/DateInput.vue'
-import SelectInput from '@/components/SelectInput.vue'
-import FormButton from '@/components/FormButton.vue'
+import CategorySelect from '@/components/CategorySelect.vue'
+import SubmitButton from '@/components/SubmitButton.vue'
 import BuckButton from '@/components/BuckButton.vue'
 
 // ルーターとルートを取得
