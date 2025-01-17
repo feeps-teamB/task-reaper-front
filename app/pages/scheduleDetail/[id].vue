@@ -41,15 +41,13 @@
   router.push(`/scheduleEdit/${route.params.id}?teamId=${teamId}`)
 }
   console.log('route.params.id:', route.params.id)
-<<<<<<< HEAD
-=======
+
   
   // モーダルを閉じる処理
   const closeModal = () => {
     // モーダルを閉じるために別のページへ移動（例: ホームに戻る）
     router.push('/')
   }
->>>>>>> 898059d (add: スケジュール編集機能実装)
 
   // データの取得
   onMounted(async () => {
