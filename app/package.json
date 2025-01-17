@@ -21,5 +21,8 @@
     "pinia": "^2.3.0",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.83.1"
   }
 }

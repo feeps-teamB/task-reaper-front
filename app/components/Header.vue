@@ -21,7 +21,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .logo{
     padding-top: 1vw;
     width: 20%;

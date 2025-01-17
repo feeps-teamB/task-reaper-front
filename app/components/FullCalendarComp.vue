@@ -34,8 +34,7 @@
           eventClick: this.handleEventClick,
           headerToolbar: false,
           eventContent: (info) => {
-            const link = document.createElement("a");
-            const url = `/scheduleDetail/${info.event.scheduleId}`;
+            const url = `/scheduleDetail/${info.event._def.publicId}`;
             const wrapper = document.createElement("div");
             wrapper.innerHTML = `<nuxt-link to="${url}">${info.event.title}</nuxt-link>`;
             return { domNodes: [wrapper] }; // DOMノードを返す
@@ -97,7 +96,7 @@
   };
 </script>
 
-<style>
+<style scoped>
 .calendar-container-border{
     height: 100%;
     width: 100%;
