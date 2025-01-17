@@ -15,6 +15,7 @@
   import dayGridPlugin from '@fullcalendar/daygrid'
   import timeGridPlugin from '@fullcalendar/timegrid'
   import { useSharedData } from '@/stores/useSharedData';
+  import interactionPlugin from '@fullcalendar/interaction';
 
   export default {
     name: "fullCalendarComp",
@@ -25,20 +26,17 @@
       return {
         sharedDataStore: useSharedData(),
         data: [],
+        //カレンダーオプション設定
         calendarOptions: {
-          plugins: [dayGridPlugin, timeGridPlugin],
+          plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
           initialView: 'dayGridMonth',
           events: [],
           locale: 'ja',
           datesSet: this.handleDatesSet,
           eventClick: this.handleEventClick,
+          dateClick: this.handleDateClick,
           headerToolbar: false,
-          eventContent: (info) => {
-            const url = `/scheduleDetail/${info.event._def.publicId}`;
-            const wrapper = document.createElement("div");
-            wrapper.innerHTML = `<nuxt-link to="${url}">${info.event.title}</nuxt-link>`;
-            return { domNodes: [wrapper] }; // DOMノードを返す
-          }
+          eventContent: this.setEventContent
         },
         calendar: null,
         events: null,
@@ -68,6 +66,15 @@
         this.sharedDataStore.updateData(year);
         document.getElementById('custom-month').textContent = month;
       },
+      //イベントクリック時のリンク生成
+      setEventContent(info){
+        const url = `/scheduleDetail/${info.event._def.publicId}`;
+        const link = document.createElement("a");
+        link.href = `/scheduleDetail/${info.event._def.publicId}`;
+        link.textContent = info.event.title;
+        link.className = "custom-event-link";
+        return { domNodes: [link] };
+      },
       //スケジュール取得してカレンダーに表示
       async fetchEvents() {
         try {
@@ -78,20 +85,26 @@
               id: event.scheduleId,
               start: event.startDate,
               title: event.title,
-              end: event.endDate
+              end: event.endDate,
+              color: event.category.color,
+              contentHeight: 'auto'
             });
           });
         } catch (error) {
           this.errorMessage = error;
         }
       },
-      //クリック時のスケジュール情報取得
-      handleEventClick(info){
-        const eventInfo = info.event;
-        console.log('イベントタイトル:', eventInfo.title);
-        console.log('開始日時:', eventInfo.start);
-        console.log('ID:', eventInfo.id); 
-      },
+      //日付クリック時の日付詳細への画面遷移
+      handleDateClick(info){
+        const date = info.date;
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const userId = 1;
+        const url = `/calendar/view/${userId}/${year}/${month}?day=${day}`;
+        const router = useRouter();
+        router.push(url);
+      }
     }
   };
 </script>
@@ -106,6 +119,7 @@
     box-shadow: 4px 4px 4px rgba(47, 71, 94, 0.50);
     border-radius: 12.50px;
     border: 1px white solid;
+    margin: auto;
 }
 
 .calendar-container{
@@ -116,18 +130,19 @@
 }  
 
 .calendar-container .fc{
-  height: 100%;
+  height: 85%;
   width: 100%;
   font-size: 0.8rem;
 }
 
 .calendar-header{
+  height: 15%;
   display: flex;
   color: white;
   justify-content: center;
 }
 
-.fc-event-main a{
+::v-deep .custom-event-link{
     text-decoration: none;
     color: black;
 }
