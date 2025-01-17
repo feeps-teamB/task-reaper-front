@@ -64,6 +64,7 @@ const closeModal = () => {
   cursor: pointer;
   height: 48px;
   width: 48px;
+  
 }
 .icon{
   position: absolute;
@@ -73,6 +74,7 @@ const closeModal = () => {
   height: 103px;
 }
 .slot{
-  text-align: center; /* スロット内のテキストを中央揃えにする */
+  width:500px;
+  margin: 13px 60px; /* 上下に10px、左右に20px */
 }
 </style>
