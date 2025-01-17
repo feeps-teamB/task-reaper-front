@@ -1,55 +1,48 @@
 <template>
-    <modal>
-      <form @submit.prevent="goToConfirm">
-        <TextInput
-          id="name"
-          label="カテゴリ名"
-          v-model="form.name"
-        />
-        <TextInput
-          id="color"
-          label="カラー"
-          v-model="form.color"
-        />
-        <!-- <div>
-          <label for="color">カテゴリカラー</label>
-          <input type="color" id="color" v-model="form.color" required />
-        </div> -->
-        <div class="button-container">
-          <BuckButton class="buck-button" type="button">戻る</BuckButton>
-          <SubmitButton class="submit-button" type="submit">作成</SubmitButton>
-        </div>
-      </form>
-      <div v-if="error" style="color: red;">
-        <p>{{ error }}</p>
+  <modal>
+    <form @submit.prevent="goToConfirm">
+      <TextInput
+        id="name"
+        label="カテゴリ名"
+        v-model="form.name"
+      />
+      <ColorPalet v-model="form.color" />
+      <div class="button-container">
+        <BuckButton class="buck-button" type="button">戻る</BuckButton>
+        <SubmitButton class="submit-button" type="submit">作成</SubmitButton>
       </div>
-    </modal>
-  </template>
-  
-  <script setup>
+    </form>
+    <div v-if="error" style="color: red;">
+      <p>{{ error }}</p>
+    </div>
+  </modal>
+</template>
+
+<script setup>
   import { ref, onMounted } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import modal from '@/components/modal'
   import TextInput from '@/components/TextInput.vue'
   import SubmitButton from '@/components/SubmitButton.vue'
   import BuckButton from '@/components/BuckButton.vue'
-  
+  import ColorPalet from '@/components/ColorPalet.vue'
+
   // ルーターとルートを取得
   const router = useRouter()
   const route = useRoute()
-  
+
   // フォームデータ
   const form = ref({
     name: '',
     color: '',
     teamId: null, // 初期値は null
   })
-  
+
   // チームIDをURLから取得してフォームデータにセット
   onMounted(() => {
     form.value.teamId = route.params.id // ここでURLのIDを取得
   })
-  
+
   // 確認画面へ遷移
   const goToConfirm = () => {
     router.push({
@@ -61,7 +54,8 @@
       }
     })
   }
-  </script>
+</script>
+
   
   <style scoped>
  form {
