@@ -33,15 +33,18 @@ export default{
         }
     },
     methods: {
+        //指定した年月へ移動
         gotoMonth(month){
             const targetYear = this.sharedDataStore.sharedYear;
             const targetMonth = month.toString().padStart(2, '0');
             const targetDate = `${targetYear}-${targetMonth}-01`;
             this.sharedDataStore.calendar.gotoDate(targetDate);
         },
+        //一月前に戻る
         gotoPrev(){
             this.sharedDataStore.sharedYear --;
         },
+        //一月後に進む
         gotoNext(){
             this.sharedDataStore.sharedYear ++;
         }
