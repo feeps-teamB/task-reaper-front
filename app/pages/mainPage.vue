@@ -14,10 +14,10 @@
 </template>
 
 <script>
-  import FullCalendarComp from '@/components/fullCalendarComp'
-  import SelectMonth from '@/components/selectMonth'
-  import SelectButton from '@/components/selectButton'
-  import Header from '@/components/header'
+  import FullCalendarComp from '@/components/FullCalendarComp'
+  import SelectMonth from '@/components/SelectMonth'
+  import SelectButton from '@/components/SelectButton'
+  import Header from '@/components/Header'
   
   export default {
     name: 'mainPage',
@@ -47,6 +47,7 @@
   display: flex;
   flex-direction: column;
 }
+
 
 
 </style>

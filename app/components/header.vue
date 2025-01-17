@@ -1,8 +1,7 @@
 <template>
     <div class = "header-container">
-        <h1>Task-Reaper</h1>
+        <img class = "logo" src="@/static/images/logo.png" alt="Logo" />
         <input class = "search-box" type = "text">
-        
         <div class="menu-container">
             <button class="menu-rectangle">
             <div class="menu-lines">
@@ -23,6 +22,11 @@
 </script>
 
 <style>
+.logo{
+    padding-top: 1vw;
+    width: 20%;
+}
+
 .border{
     width: 100%;
     height: 100%;
