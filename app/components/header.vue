@@ -1,6 +1,6 @@
 <template>
     <div class = "header-container">
-        <h1>Task-Reaper</h1>
+        <img class = "logo" src="@/static/images/logo.png" alt="Logo" />
         <input class = "search-box" type = "text">
         <div class="menu-container">
             <button class="menu-rectangle">
@@ -22,6 +22,11 @@
 </script>
 
 <style>
+.logo{
+    padding-top: 1vw;
+    width: 20%;
+}
+
 .border{
     width: 100%;
     height: 100%;
@@ -42,6 +47,7 @@
     margin-right: 6vw;
     height: 4vh;
     width: 50vw;
+    border-radius: 5px;
 }
 
 .menu-lines{
@@ -98,6 +104,6 @@
   width: 4vh; /* 線の長さ */
   height: 0.5vh; /* 線の太さ */
   background-color: black; /* 線の色 */
-  border-radius: 2px; /* 角を丸める */
+  border-radius: 5px; /* 角を丸める */
 }
 </style>
