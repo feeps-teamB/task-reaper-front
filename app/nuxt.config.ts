@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // // https://nuxt.com/docs/api/configuration/nuxt-config
 // export default defineNuxtConfig({
 //   modules: [
@@ -20,3 +21,5 @@
 
 //   compatibilityDate: '2025-01-18',
 // })
+=======
+>>>>>>> 8aa48ca4abe45ad0133023354b724f80769a26ee
