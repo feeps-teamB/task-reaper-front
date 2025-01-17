@@ -27,7 +27,7 @@
           alt="Task Reaper Hero Banner"
         />
       </section>
-      <iframe style="border: 1px solid rgba(0, 0, 0, 0.1); position: absolute; top: 380px; left: 830px;" width="510" height="380" src="https://embed.figma.com/proto/PjzjpL38bKyQR1XsqGzepq/TASK-REAPER?node-id=25-2259&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=25%3A2259&show-proto-sidebar=0&embed-host=share" allowfullscreen></iframe>
+      <!-- <iframe style="border: 1px solid rgba(0, 0, 0, 0.1); position: absolute; top: 380px; left: 830px;" width="510" height="380" src="https://embed.figma.com/proto/PjzjpL38bKyQR1XsqGzepq/TASK-REAPER?node-id=25-2259&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=25%3A2259&show-proto-sidebar=0&embed-host=share" allowfullscreen></iframe> -->
       <div>
     <p>リンク置き場</p>
     <nuxt-link to="/scheduleDetail/1" class="schedule-link">スケジュール1詳細</nuxt-link>
