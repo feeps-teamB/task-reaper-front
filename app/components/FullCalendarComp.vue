@@ -96,7 +96,7 @@
   };
 </script>
 
-<style>
+<style scoped>
 .calendar-container-border{
     height: 100%;
     width: 100%;

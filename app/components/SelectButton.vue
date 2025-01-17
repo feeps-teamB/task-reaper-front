@@ -6,7 +6,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .button-container{
     width: 80%;
     display: flex;

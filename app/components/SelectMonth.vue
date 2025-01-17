@@ -49,7 +49,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .image-button {
   background: none;
   border: none;
