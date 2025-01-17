@@ -63,10 +63,6 @@ const goBack = () => {
 // エラー
 const error = ref(null)
 
-// カテゴリIDを使ってカテゴリ情報を取得
-
-
-
 </script>
 
 <style scoped>
