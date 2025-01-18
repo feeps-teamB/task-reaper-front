@@ -61,9 +61,10 @@ export default {
     },
     //年と月情報取得
     handleDatesSet(info) {
-      const month = info.view.currentStart.toLocaleString('default', { month: 'long' });
+      const month = (info.view.currentStart.getMonth() + 1).toString().padStart(2, '0');
       const year = info.view.currentStart.getFullYear();
       this.sharedDataStore.updateData(year);
+      this.sharedDataStore.updateDate(month);
       document.getElementById('custom-month').textContent = month;
     },
     //イベントクリック時のリンク生成
@@ -78,7 +79,9 @@ export default {
     //スケジュール取得してカレンダーに表示
     async fetchEvents() {
       try {
-        const response = await fetch(`http://localhost:8080/calendar/view/1/2025/01`);
+        const year = this.sharedDataStore.sharedYear;
+        const month = this.sharedDataStore.sharedDate;
+        const response = await fetch(`http://localhost:8080/calendar/view/1/${year}/${month}`);
         const data = await response.json();
         data.forEach(event => {
           this.calendar.addEvent({
