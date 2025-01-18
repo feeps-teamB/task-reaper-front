@@ -1,8 +1,16 @@
 <template>
   <modal>
     <div v-if="team">
-      <p><strong>チーム名:</strong> {{ team.name }}</p>
-      <p><strong>説明:</strong> {{ team.description }}</p>
+      <TextRead
+      label="チーム名"
+      id="form-title"
+      :value="team.name"
+      />
+      <TextRead
+      label="概要"
+      id="form-title"
+      :value="team.description"
+      />
     </div>
     <div v-else-if="error">
       <p style="color: red;">{{ error }}</p>
@@ -16,6 +24,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import modal from '@/components/modal'
+import TextRead from '@/components/TextRead'
 
 // ルートとルーターを取得
 const route = useRoute()

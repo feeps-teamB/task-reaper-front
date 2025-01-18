@@ -17,7 +17,7 @@
     />
     <div class="button-container">
       <BuckButton class="buck-button" type="button" @click="goBack">戻る</BuckButton>
-      <SubmitButton class="submit-button" type="submit" @click="submitForm">作成</SubmitButton>
+      <SubmitButton class="submit-button" type="submit" @click="submitForm">保存</SubmitButton>
     </div>
     <div v-if="error" style="color: red;">
       <p>{{ error }}</p>
@@ -48,7 +48,7 @@ const submitForm = async () => {
       method: 'POST',
       body: form.value,
     })
-    router.push('/')
+    router.push('/mainPage')
   } catch (err) {
     console.error('保存に失敗しました:', err)
     error.value = '保存に失敗しました。後ほど再試行してください。'
