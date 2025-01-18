@@ -9,7 +9,7 @@
       <ColorPalet v-model="form.color" />
       <div class="button-container">
         <BuckButton class="buck-button" type="button">戻る</BuckButton>
-        <SubmitButton class="submit-button" type="submit">作成</SubmitButton>
+        <SubmitButton class="submit-button" type="submit">確認</SubmitButton>
       </div>
     </form>
     <div v-if="error" style="color: red;">

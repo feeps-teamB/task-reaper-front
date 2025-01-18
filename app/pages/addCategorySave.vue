@@ -17,7 +17,7 @@
     />
     <div class="button-container">
       <BuckButton class="buck-button" type="button" @click="goBack">戻る</BuckButton>
-      <SubmitButton class="submit-button" type="submit" @click="submitForm">作成</SubmitButton>
+      <SubmitButton class="submit-button" type="submit" @click="submitForm">保存</SubmitButton>
     </div>
     <div v-if="error" style="color: red;">
       <p>{{ error }}</p>
