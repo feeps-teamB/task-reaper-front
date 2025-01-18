@@ -48,7 +48,7 @@ const submitForm = async () => {
       method: 'POST',
       body: form.value,
     })
-    router.push('/')
+    router.push('/mainPage')
   } catch (err) {
     console.error('保存に失敗しました:', err)
     error.value = '保存に失敗しました。後ほど再試行してください。'
