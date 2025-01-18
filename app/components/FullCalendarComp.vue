@@ -45,7 +45,7 @@ export default {
   },
   async mounted() {
     this.getFullCalendar();
-    this.fetchEvents(this.calendar);
+    this.fetchEvents();
   },
   methods: {
     //カレンダー情報取得
@@ -76,11 +76,11 @@ export default {
       return { domNodes: [link] };
     },
     //スケジュール取得してカレンダーに表示
-    async fetchEvents(calendar) {
+    async fetchEvents() {
       try {
-        const month = calendar.view.currentStart.getMonth() + 1
+        const month = this.calendar.view.currentStart.getMonth() + 1
         const stringMonth = month.toString().padStart(2, '0');
-        const year = calendar.getFullYear();
+        const year = this.calendar.view.currentStart.getFullYear();
         const response = await fetch(`http://localhost:8080/calendar/view/1/${year}/${stringMonth}`);
         const data = await response.json();
         data.forEach(event => {
