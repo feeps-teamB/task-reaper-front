@@ -2,7 +2,7 @@
     <div class = "button-container">
         <a class = "button" href = "/teamSelectSchedule/1">Add</a>
         <a class = "button" href = "/teamDetail/1">Teams</a>
-        <a class = "button" href = "/teamSelectSchedule/1">Category</a>
+        <a class = "button" href = "/teamSelectCategory/1">Category</a>
     </div>
 </template>
 

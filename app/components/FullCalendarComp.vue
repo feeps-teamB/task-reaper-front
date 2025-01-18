@@ -45,7 +45,7 @@ export default {
   },
   async mounted() {
     this.getFullCalendar();
-    this.fetchEvents();
+    this.fetchEvents(this.calendar);
   },
   methods: {
     //カレンダー情報取得
@@ -76,9 +76,11 @@ export default {
       return { domNodes: [link] };
     },
     //スケジュール取得してカレンダーに表示
-    async fetchEvents() {
+    async fetchEvents(calendar) {
       try {
-        const response = await fetch('http://localhost:8080/calendar/view/1/2024/12');
+        const month = calendar.getMonth();
+        const year = calendar.getFullYear();
+        const response = await fetch(`http://localhost:8080/calendar/view/1/${year}/${month}`);
         const data = await response.json();
         data.forEach(event => {
           this.calendar.addEvent({
@@ -100,8 +102,7 @@ export default {
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       const day = date.getDate();
-      const userId = 1;
-      const url = `/calendar/view/${userId}/${year}/${month}?day=${day}`;
+      const url = `/dayDetail/${year}/${month}/${day}`;
       const router = useRouter();
       router.push(url);
     }
