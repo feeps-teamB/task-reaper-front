@@ -78,9 +78,10 @@ export default {
     //スケジュール取得してカレンダーに表示
     async fetchEvents(calendar) {
       try {
-        const month = calendar.getMonth();
+        const month = calendar.view.currentStart.getMonth() + 1
+        const stringMonth = month.toString().padStart(2, '0');
         const year = calendar.getFullYear();
-        const response = await fetch(`http://localhost:8080/calendar/view/1/${year}/${month}`);
+        const response = await fetch(`http://localhost:8080/calendar/view/1/${year}/${stringMonth}`);
         const data = await response.json();
         data.forEach(event => {
           this.calendar.addEvent({
